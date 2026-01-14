@@ -18,3 +18,8 @@ env/
 
 # Data / logs (optional)
 *.log
+
+# Secrets
+.env
+**/.env
+
