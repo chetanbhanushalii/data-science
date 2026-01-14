@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import wordpunct_tokenize
 from sklearn.base import BaseEstimator, TransformerMixin
 
 data = pd.read_csv('user_courses_review_09_2023.csv', on_bad_lines='skip')
@@ -68,10 +69,15 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
 
     def clean_text(self, text):
         text = re.sub(r"[^a-zA-Z]", " ", text.lower()) # Lowercase and remove non-alphabetic characters
-        tokens = nltk.word_tokenize(text) # Tokenize
+        tokens = wordpunct_tokenize(text) # Tokenize
         
         # Remove stopwords and lemmatize
-        tokens = [self.lemmatizer.lemmatize(word) for word in tokens if word not in self.stop_words and word not in string.punctuation]
+        # tokens = [self.lemmatizer.lemmatize(word) for word in tokens if word not in self.stop_words and word not in string.punctuation]
+        tokens = [
+            self.lemmatizer.lemmatize(w)
+            for w in tokens
+            if w not in self.stop_words and w not in string.punctuation
+        ]
         return ' '.join(tokens)
 
     def fit(self, X, y=None):
