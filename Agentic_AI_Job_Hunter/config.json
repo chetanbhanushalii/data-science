@@ -1,0 +1,14 @@
+{
+  "excel_path": "./data/companies.xlsx",
+  "job_title_keywords": [
+    "data scientist",
+    "data science",
+    "machine learning engineer",
+    "ml engineer",
+    "data analyst"
+  ],
+  "notification_email": {
+    "from_email": "your_email@example.com",
+    "to_email": "your_email@example.com"
+  }
+}
